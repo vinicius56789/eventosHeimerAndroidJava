@@ -4,15 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.heimer.Modelo.Evento;
 
+import java.text.SimpleDateFormat;
+
 public class CadastroEvento extends AppCompatActivity {
 
-    private final int RESULT_CODE_NOVO_EVENTO = 1;
+    private final int RESULT_CODE_NOVO_EVENTO = 10;
     private final int RESULT_CODE_EDITAR_EVENTO = 20;
     private final int RESULT_CODE_EXCLUIR_EVENTO = 30;
     private boolean edicao = false;
@@ -52,6 +55,7 @@ public class CadastroEvento extends AppCompatActivity {
         String nome = etNome.getText().toString();
         String local = etLocal.getText().toString();
         String data = etData.getText().toString();
+//      SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         Evento evento = new Evento(id, nome, local, data);
         Intent intent = new Intent();
         if(edicao){

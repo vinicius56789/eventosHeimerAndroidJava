@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
             for(int i = 0; i < adapterEvento.getCount(); i++){
                 Evento evento = adapterEvento.getItem(i);
                 if(evento.getId() == eventoExcluido.getId()){
-                    adapterEvento.remove(eventoExcluido);
+                    adapterEvento.remove(evento);
                     break;
                 }
             }

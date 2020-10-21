@@ -50,6 +50,6 @@ public class Evento implements Serializable {
 
     @Override
     public String toString() {
-        return "Evento" + getNome() + "- Local" + getLocal() + "- Data: " + getData();
+        return "Evento: " + getNome() + " - Local: " + getLocal() + " - Data: " + getData();
     }
 }
