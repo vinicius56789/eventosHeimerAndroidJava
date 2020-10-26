@@ -10,15 +10,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.heimer.Modelo.Evento;
+import com.example.heimer.database.ProdutoDAO;
 
 import java.text.SimpleDateFormat;
 
 public class CadastroEvento extends AppCompatActivity {
 
-    private final int RESULT_CODE_NOVO_EVENTO = 10;
-    private final int RESULT_CODE_EDITAR_EVENTO = 20;
-    private final int RESULT_CODE_EXCLUIR_EVENTO = 30;
-    private boolean edicao = false;
     private int id = 0;
 
     @Override
@@ -39,7 +36,6 @@ public class CadastroEvento extends AppCompatActivity {
             nome.setText(evento.getNome());
             local.setText(evento.getLocal());
             data.setText(evento.getData());
-            edicao = true;
             id = evento.getId();
         }
     }
@@ -55,15 +51,13 @@ public class CadastroEvento extends AppCompatActivity {
         String nome = etNome.getText().toString();
         String local = etLocal.getText().toString();
         String data = etData.getText().toString();
-//      SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         Evento evento = new Evento(id, nome, local, data);
-        Intent intent = new Intent();
-        if(edicao){
-            intent.putExtra("eventoEditado", evento);
-            setResult(RESULT_CODE_EDITAR_EVENTO, intent);
+        ProdutoDAO produtoDAO = new ProdutoDAO(getBaseContext());
+        boolean salvou = produtoDAO.salvar(evento);
+        if(salvou){
+            finish();
         }else{
-            intent.putExtra("novoEvento", evento);
-            setResult(RESULT_CODE_NOVO_EVENTO, intent);
+            Toast.makeText(CadastroEvento.this, "Erro ao salvar, tente mais tarde", Toast.LENGTH_LONG).show();
         }
         finish();
     }
@@ -72,8 +66,8 @@ public class CadastroEvento extends AppCompatActivity {
         Intent intent = getIntent();
         if(intent != null && intent.getExtras() != null && intent.getExtras().getSerializable("eventoExcluir") != null){
             Evento evento = (Evento) intent.getExtras().getSerializable("eventoExcluir");
-            intent.putExtra("eventoExcluido", evento);
-            setResult(RESULT_CODE_EXCLUIR_EVENTO, intent);
+            ProdutoDAO produtoDAO = new ProdutoDAO(getBaseContext());
+            produtoDAO.excluir(evento);
             finish();
         }else{
             Toast.makeText(CadastroEvento.this, "Item não criado, ímpossivel Excluir.", Toast.LENGTH_LONG).show();
