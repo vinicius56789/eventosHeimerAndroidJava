@@ -5,17 +5,21 @@ import android.content.Context;
 import android.database.Cursor;
 
 import com.example.heimer.Modelo.Evento;
+import com.example.heimer.Modelo.Local;
 import com.example.heimer.database.entity.EventoEntity;
+import com.example.heimer.database.entity.LocalEntity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProdutoDAO {
+public class EventoDAO {
 
-    private String SQL_LISTAR_TODOS = "SELECT * FROM " + EventoEntity.TABLE_NAME;
+    private String SQL_LISTAR_TODOS = "SELECT evento._id, evento.nome, evento.data, local.nome, local.bairro, local.cidade, local.capacidade, local._id FROM " +
+            EventoEntity.TABLE_NAME +  " INNER JOIN " + LocalEntity.TABLE_NAME + " ON " +
+            EventoEntity.TABLE_NAME + "." + EventoEntity.COLUMN_NAME_LOCAL + " = " + LocalEntity.TABLE_NAME + "." + LocalEntity.COLUMN_NAME_NOME;
     private DBGateway dbGateway;
 
-    public ProdutoDAO(Context context){
+    public EventoDAO(Context context){
         dbGateway = DBGateway.getInstance(context);
     }
 
@@ -23,7 +27,7 @@ public class ProdutoDAO {
         ContentValues contentValues = new ContentValues();
         contentValues.put(EventoEntity.COLUMN_NAME_NOME, evento.getNome());
         contentValues.put(EventoEntity.COLUMN_NAME_DATA, evento.getData());
-        contentValues.put(EventoEntity.COLUMN_NAME_LOCAL, evento.getLocal());
+        contentValues.put(EventoEntity.COLUMN_NAME_LOCAL, evento.getLocal().getNome());
         if(evento.getId() > 0){
             return dbGateway.getDatabase().update(EventoEntity.TABLE_NAME, contentValues, EventoEntity._ID + "=?", new String[]{String.valueOf(evento.getId())}) > 0;
         }
@@ -35,8 +39,13 @@ public class ProdutoDAO {
         Cursor cursor = dbGateway.getDatabase().rawQuery(SQL_LISTAR_TODOS, null);
         while(cursor.moveToNext()){
             int id = cursor.getInt(cursor.getColumnIndex(EventoEntity._ID));
+            int idLocal = cursor.getInt(cursor.getColumnIndex(LocalEntity._ID));
             String nome = cursor.getString(cursor.getColumnIndex(EventoEntity.COLUMN_NAME_NOME));
-            String local = cursor.getString(cursor.getColumnIndex(EventoEntity.COLUMN_NAME_LOCAL));
+            String nomeLocal = cursor.getString(cursor.getColumnIndex(LocalEntity.COLUMN_NAME_NOME));
+            String bairro = cursor.getString(cursor.getColumnIndex(LocalEntity.COLUMN_NAME_BAIRRO));
+            String cidade = cursor.getString(cursor.getColumnIndex(LocalEntity.COLUMN_NAME_CIDADE));
+            int capacidade = cursor.getInt(cursor.getColumnIndex(LocalEntity.COLUMN_NAME_CAPACIDADE));
+            Local local = new Local(idLocal, nomeLocal, bairro, cidade, capacidade);
             String data =  cursor.getString(cursor.getColumnIndex(EventoEntity.COLUMN_NAME_DATA));
             eventos.add(new Evento(id, nome, local, data));
         }

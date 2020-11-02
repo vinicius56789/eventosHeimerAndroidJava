@@ -2,47 +2,63 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/btnCadastrarLocal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".CadastroEvento" >
+    tools:context=".CadastroLocal">
 
     <TextView
-        android:id="@+id/tvNome"
+        android:id="@+id/tvNomeLocal"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:text="Nome do evento" />
+        android:text="Nome do Local" />
 
     <EditText
-        android:id="@+id/etNome"
+        android:id="@+id/etNomeLocal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName" />
 
     <TextView
-        android:id="@+id/tvLocal"
+        android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:text="Local do Evento" />
-
-    <Spinner
-        android:id="@+id/spinnerLocal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/tvData"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:text="Data" />
+        android:text="Bairro" />
 
     <EditText
-        android:id="@+id/etData"
+        android:id="@+id/etBairro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/tvCidade"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="Cidade" />
+
+    <EditText
+        android:id="@+id/etCidade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/tvCapacidade"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="Capacidade" />
+
+    <EditText
+        android:id="@+id/etCapacidade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -50,7 +66,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnCadastro"
+            android:id="@+id/button2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -58,7 +74,7 @@
             android:text="Cadastrar" />
 
         <Button
-            android:id="@+id/btnVoltar"
+            android:id="@+id/btnVoltarCadastroLocal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -66,7 +82,7 @@
             android:text="Voltar" />
 
         <Button
-            android:id="@+id/btnExcluir"
+            android:id="@+id/button4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

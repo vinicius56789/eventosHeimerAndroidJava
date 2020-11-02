@@ -6,10 +6,10 @@ public class Evento implements Serializable {
 
     private int id;
     private String nome;
-    private String local;
+    private Local local;
     private String data;
 
-    public Evento(int id, String nome, String local, String data) {
+    public Evento(int id, String nome, Local local, String data) {
         this.id = id;
         this.nome = nome;
         this.local = local;
@@ -32,11 +32,11 @@ public class Evento implements Serializable {
         this.nome = nome;
     }
 
-    public String getLocal() {
+    public Local getLocal() {
         return local;
     }
 
-    public void setLocal(String local) {
+    public void setLocal(Local local) {
         this.local = local;
     }
 

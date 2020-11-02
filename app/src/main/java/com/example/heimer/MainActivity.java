@@ -1,21 +1,14 @@
 package com.example.heimer;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.EventLog;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
-
 import com.example.heimer.Modelo.Evento;
-import com.example.heimer.database.ProdutoDAO;
-
-import java.util.ArrayList;
+import com.example.heimer.database.EventoDAO;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,13 +40,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        ProdutoDAO produtoDAO = new ProdutoDAO(getBaseContext());
-        adapterEvento = new ArrayAdapter<Evento>(MainActivity.this, android.R.layout.simple_list_item_1, produtoDAO.listar());
+        EventoDAO eventoDAO = new EventoDAO(getBaseContext());
+        adapterEvento = new ArrayAdapter<Evento>(MainActivity.this, android.R.layout.simple_list_item_1, eventoDAO.listar());
         lvEventos.setAdapter(adapterEvento);
     }
 
     public void onClickCadastrarEvento(View v){
         Intent intent = new Intent(MainActivity.this, CadastroEvento.class);
         startActivity(intent);
+    }
+
+    public void onClickListarLocais(View v){
+        Intent intent = new Intent(MainActivity.this, ListarLocal.class);
+        startActivity(intent);
+        finish();
     }
 }
