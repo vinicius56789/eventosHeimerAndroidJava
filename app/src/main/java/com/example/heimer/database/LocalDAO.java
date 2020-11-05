@@ -36,11 +36,11 @@ public class LocalDAO {
         Cursor cursor = dbGateway.getDatabase().rawQuery(SQL_LISTAR_TODOS, null);
         while(cursor.moveToNext()){
             int id = cursor.getInt(cursor.getColumnIndex(LocalEntity._ID));
-            String nome = cursor.getString(cursor.getColumnIndex(LocalEntity.COLUMN_NAME_NOME));
+            String nomeLocal = cursor.getString(cursor.getColumnIndex(LocalEntity.COLUMN_NAME_NOME));
             String bairro = cursor.getString(cursor.getColumnIndex(LocalEntity.COLUMN_NAME_BAIRRO));
             String cidade = cursor.getString(cursor.getColumnIndex(LocalEntity.COLUMN_NAME_CIDADE));
             int capacidade = cursor.getInt(cursor.getColumnIndex(LocalEntity.COLUMN_NAME_CAPACIDADE));
-            locais.add(new Local(id, nome, bairro, cidade, capacidade));
+            locais.add(new Local(id, nomeLocal, bairro, cidade, capacidade));
         }
         cursor.close();
         return locais;

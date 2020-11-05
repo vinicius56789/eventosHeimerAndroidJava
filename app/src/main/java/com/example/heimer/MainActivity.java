@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import com.example.heimer.Modelo.Evento;
 import com.example.heimer.database.EventoDAO;
@@ -42,6 +43,14 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         EventoDAO eventoDAO = new EventoDAO(getBaseContext());
         adapterEvento = new ArrayAdapter<Evento>(MainActivity.this, android.R.layout.simple_list_item_1, eventoDAO.listar());
+        lvEventos.setAdapter(adapterEvento);
+    }
+
+    public void onClickPesquisar(View v){
+        EditText etPesquisar = findViewById(R.id.etPesquisa);
+        String string = etPesquisar.toString();
+        EventoDAO eventoDAO = new EventoDAO(getBaseContext());
+        adapterEvento = new ArrayAdapter<Evento>(MainActivity.this, android.R.layout.simple_list_item_1, eventoDAO.busca(string));
         lvEventos.setAdapter(adapterEvento);
     }
 

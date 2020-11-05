@@ -45,7 +45,7 @@ public class CadastroEvento extends AppCompatActivity {
         Intent intent = getIntent();
         if(intent != null && intent.getExtras() != null && intent.getExtras().get("eventoEdicao") != null){
             Evento evento = (Evento) intent.getExtras().get("eventoEdicao");
-            nome.setText(evento.getNome());
+            nome.setText(evento.getNomeEvento());
             data.setText(evento.getData());
             int localEvento = obterPosicaoLocal(evento.getLocal());
             nome_local.setSelection(localEvento);

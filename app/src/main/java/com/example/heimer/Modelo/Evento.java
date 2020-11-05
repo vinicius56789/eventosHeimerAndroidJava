@@ -24,7 +24,7 @@ public class Evento implements Serializable {
         this.id = id;
     }
 
-    public String getNome() {
+    public String getNomeEvento() {
         return nome;
     }
 
@@ -50,6 +50,6 @@ public class Evento implements Serializable {
 
     @Override
     public String toString() {
-        return "Evento: " + getNome() + " - Local: " + getLocal() + " - Data: " + getData();
+        return "Evento: " + getNomeEvento() + " - Local: " + getLocal() + " - Data: " + getData();
     }
 }
